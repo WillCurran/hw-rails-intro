@@ -66,3 +66,13 @@ Cannot render console from 165.91.13.156! Allowed networks: 127.0.0.1, ::1, 127.
 
 Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for 165.91.13.156 at 2021-09-24 16:38:43 +0000
 Cannot render console from 165.91.13.156! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/" for 165.91.13.156 at 2021-09-24 17:34:08 +0000
+Cannot render console from 165.91.13.156! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MoviesController#index as HTML
+  [1m[35mMovie Load (0.3ms)[0m  SELECT "movies".* FROM "movies"
+  Rendered movies/index.html.erb within layouts/application (9.4ms)
+  Rendered layouts/_flash.erb (0.4ms)
+Completed 200 OK in 252ms (Views: 249.7ms | ActiveRecord: 0.5ms)
