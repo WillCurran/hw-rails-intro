@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+    @sort_asc = false
 
     def show
       id = params[:id] # retrieve movie ID from URI route
@@ -7,7 +8,13 @@ class MoviesController < ApplicationController
     end
   
     def index
-      @movies = Movie.all
+      @title_style = params[:active_col] == 'title' ? 'hilite bg-warning' : ''
+      @release_style = params[:active_col] == 'release_date' ? 'hilite bg-warning' : ''
+      if params[:active_col] != nil && params[:sort_dir] != nil
+        @movies = Movie.all.order(params[:active_col] + ' ' + params[:sort_dir])
+      else
+        @movies = Movie.all
+      end
     end
   
     def new

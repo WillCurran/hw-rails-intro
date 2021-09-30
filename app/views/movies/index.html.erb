@@ -6,9 +6,13 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th>Movie Title</th>
+      <th class="<%= @title_style %>">
+        <%= sort_helper 'Movie Title', 'title' %>
+      </th>
       <th>Rating</th>
-      <th>Release Date</th>
+      <th class="<%= @release_style %>">
+        <%= sort_helper 'Release Date', 'release_date' %>
+      </th>
       <th>More Info</th>
     </tr>
   </thead>
