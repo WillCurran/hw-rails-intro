@@ -8,12 +8,15 @@ class MoviesController < ApplicationController
     end
   
     def index
+      @all_ratings = Movie.all_ratings
+      @ratings_selected = params[:ratings].nil? ? @all_ratings.to_a : params[:ratings].keys
       @title_style = params[:active_col] == 'title' ? 'hilite bg-warning' : ''
       @release_style = params[:active_col] == 'release_date' ? 'hilite bg-warning' : ''
-      if params[:active_col] != nil && params[:sort_dir] != nil
-        @movies = Movie.all.order(params[:active_col] + ' ' + params[:sort_dir])
+      @movies = Movie.with_ratings(@ratings_selected)
+      if !params[:active_col].nil? && !params[:sort_dir].nil?
+        @movies = Movie.with_ratings(@ratings_selected).order(params[:active_col] + ' ' + params[:sort_dir])
       else
-        @movies = Movie.all
+        @movies = Movie.with_ratings(@ratings_selected)
       end
     end
   
