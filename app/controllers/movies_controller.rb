@@ -8,6 +8,7 @@ class MoviesController < ApplicationController
     end
   
     def index
+      reconcile_session
       @all_ratings = Movie.all_ratings
       @ratings_selected = params[:ratings].nil? ? @all_ratings.to_a : params[:ratings].keys
       @title_style = params[:active_col] == 'title' ? 'hilite bg-warning' : ''
@@ -53,5 +54,27 @@ class MoviesController < ApplicationController
     # This helps make clear which methods respond to requests, and which ones do not.
     def movie_params
       params.require(:movie).permit(:title, :rating, :description, :release_date)
+    end
+    
+    def reconcile_session
+      should_redirect = false
+      if params[:ratings].nil? and !session[:ratings].nil?
+        params[:ratings] = session[:ratings]
+        should_redirect = true
+      elsif !params[:ratings].nil?
+        session[:ratings] = params[:ratings]
+      end
+      if params[:active_col].nil? and !session[:active_col].nil?
+        params[:active_col] = session[:active_col]
+        params[:sort_dir] = session[:sort_dir]
+        should_redirect = true
+      elsif !params[:active_col].nil?
+        session[:active_col] = params[:active_col]
+        session[:sort_dir] = params[:sort_dir]
+      end
+      if should_redirect
+        flash.keep
+        redirect_to root_path params
+      end
     end
   end
